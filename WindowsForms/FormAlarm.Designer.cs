@@ -72,6 +72,7 @@
             this.cbSounds.Name = "cbSounds";
             this.cbSounds.Size = new System.Drawing.Size(121, 21);
             this.cbSounds.TabIndex = 2;
+            this.cbSounds.SelectedIndexChanged += new System.EventHandler(this.cbSounds_SelectedIndexChanged);
             // 
             // btnOK
             // 

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Drawing.Text;
+using System.Reflection;
 
 namespace WindowsForms
 {
@@ -23,7 +24,8 @@ namespace WindowsForms
 		bool showDate;
 		bool showControls;
 		ChooseFont chooseFont;
-		int fontIndex;
+		FormAlarm formAlarm;
+        int fontIndex;
 		public Form1()
 		{
 			InitializeComponent();
@@ -34,23 +36,34 @@ namespace WindowsForms
 			ControlsVisibility(false);
 			showDate = false;
 			showControls = false;
-			Directory.SetCurrentDirectory("..\\..\\Fonts");
+			onTopToolStripMenuItem.Checked = true;
+            Directory.SetCurrentDirectory("..\\..\\Fonts");
 			//label1.ForeColor = Color.Red;
 			//label1.BackColor = Color.Black;
 			size = 48;
 			LoadSettings();
-			chooseFont = new ChooseFont(fontIndex);
-			colorDialog1 = new ColorDialog();
+			chooseFont = new ChooseFont();
+            formAlarm = new FormAlarm();
+            colorDialog1 = new ColorDialog();
 			colorDialog2 = new ColorDialog();
 			colorDialog1.Color = foreground;
 			colorDialog2.Color = background;
-		}
+
+			SetMainDebug();
+			SetChooseDebug();
+
+            foreach (string i in chooseFont.AllFonts)
+            {
+                toolStripComboBox1.Items.Add(i.Split('\\').Last());
+            }
+        }
 		void ControlsVisibility(bool visible)
 		{
 			cbShowDate.Visible = visible;
 			btnExit.Visible = visible;
 			btnHideControls.Visible = visible;
 			btnChooseFont.Visible = visible;
+			btnAlarm.Visible = visible;
 			this.ShowInTaskbar = visible;
 			this.TransparencyKey = !visible ? SystemColors.Control : Color.White;
 			this.FormBorderStyle = !visible ? FormBorderStyle.None : FormBorderStyle.Sizable;
@@ -59,8 +72,6 @@ namespace WindowsForms
 
 		private void timer1_Tick(object sender, EventArgs e)
 		{
-			//https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-date-and-time-format-strings
-			//https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings
 			label1.Text = DateTime.Now.ToString("hh:mm:ss tt");
 			//label2.Text = DateTime.Now.ToString("yyyy.MM.dd ddd");
 			//label2.Visible = cbShowDate.Checked;
@@ -69,6 +80,7 @@ namespace WindowsForms
 				string date = DateTime.Now.ToString("yyyy.MM.dd ddd");
 				label1.Text = $"{label1.Text}\n{date}";
 			}
+			if(formAlarm.B == true) if(label1.Text == formAlarm.MaskedTextBox1.Text) formAlarm.Sp.Play();
 		}
 
 		private void btnExit_Click(object sender, EventArgs e)
@@ -117,18 +129,18 @@ namespace WindowsForms
 		}
 		private void SetMainDebug()
 		{
-			lblDebugMainFont.Text = $"fontFile:	{fontFile};\n";
+			//lblDebugMainFont.Text = $"fontFile:	{fontFile};\n";
 			//lblDebugMainFont.Text += $"font:		{font};\n";
-			lblDebugMainFont.Text += $"fontIndex:	{fontIndex};\n";
-			lblDebugMainFont.Text += $"label1.Font:{label1.Font.Name};\n";
+			//lblDebugMainFont.Text += $"fontIndex:	{fontIndex};\n";
+			//lblDebugMainFont.Text += $"label1.Font:{label1.Font.Name};\n";
 		}
 		private void SetChooseDebug()
 		{
-			lblDebugCooseFont.Text = $"index:		{chooseFont.Index};\n";
-			lblDebugCooseFont.Text += $"FontFromArr:{chooseFont.AllFonts[chooseFont.Index]};\n";
+			//lblDebugCooseFont.Text = $"index:		{chooseFont.Index};\n";
+			//lblDebugCooseFont.Text += $"FontFromArr:{chooseFont.AllFonts[chooseFont.Index]};\n";
 			//lblDebugCooseFont.Text += $"ExampleFont:{chooseFont.LblExample.Font.Name};\n";
-			if (chooseFont.NewFont.Name != null)
-				lblDebugCooseFont.Text += $"NewFont:		{chooseFont.NewFont.Name}";
+			//if (chooseFont.NewFont.Name != null)
+			//	lblDebugCooseFont.Text += $"NewFont:		{chooseFont.NewFont.Name}";
 		}
 		public void SaveSettings()
 		{
@@ -181,5 +193,33 @@ namespace WindowsForms
 				label1.BackColor = background; 
 			}
 		}
-	}
+
+        private void btnAlarm_Click(object sender, EventArgs e)
+        {
+			formAlarm = new FormAlarm();
+            this.TopMost = false;
+            DialogResult result = formAlarm.ShowDialog();
+            Directory.SetCurrentDirectory("..\\Fonts");
+            this.TopMost = true;
+        }
+
+        private void toolStripComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            fontIndex = toolStripComboBox1.SelectedIndex;
+            PrivateFontCollection pfc = new PrivateFontCollection();
+			pfc.AddFontFile(chooseFont.AllFonts[fontIndex]);
+            label1.Font = new Font(pfc.Families[0], 48);
+
+			fontFile = chooseFont.AllFonts[fontIndex];
+			fontIndex = toolStripComboBox1.SelectedIndex;
+            chooseFont.Index = fontIndex;
+			chooseFont.NewFont = label1.Font;
+        }
+
+        private void onTopToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			this.TopMost = !this.TopMost;
+			onTopToolStripMenuItem.Checked = !onTopToolStripMenuItem.Checked;
+        }
+    }
 }

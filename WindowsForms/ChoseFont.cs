@@ -14,7 +14,7 @@ namespace WindowsForms
 {
 	public partial class ChooseFont : Form
 	{
-		public int Index { get { return index; } }
+		public int Index { get { return index; } set { index = value; } }
 		public string[] AllFonts { get { return allFonts; } }
 		int index;
 		string[] allFonts;
@@ -28,15 +28,19 @@ namespace WindowsForms
 			{
 				cbFonts.Items.Add(i.Split('\\').Last());
 			}
+
 		}
 		public ChooseFont(string fontFile) : this()
 		{
 			SetActualFont(fontFile);
 		}
-		public ChooseFont(int fontIndex) : this()
-		{
-			SetActualFont(fontIndex);
-		}
+		//public ChooseFont(int fontIndex) : this()
+		//{
+		//	//SetActualFont(fontIndex);
+		//    cbFonts.SelectedIndex = fontIndex;
+		//	this.Index = fontIndex;
+		//	NewFont = (Font);
+		//}
 
 		public void SetActualFont(string fontFile)
 		{
@@ -59,13 +63,16 @@ namespace WindowsForms
 
 		private void btnCancel_Click(object sender, EventArgs e)
 		{
+			cbFonts.SelectedIndex = index;
+			lblExample.Font = (Font)NewFont.Clone();
 			this.Close();
 		}
 
 		private void btnOK_Click(object sender, EventArgs e)
 		{
-			string currentDirectory = Directory.GetCurrentDirectory();
+			//string currentDirectory = Directory.GetCurrentDirectory();
 			//MessageBox.Show(this, currentDirectory);
+			this.Index = cbFonts.SelectedIndex;
 			NewFont = lblExample.Font;
 			this.Close();
 		}
