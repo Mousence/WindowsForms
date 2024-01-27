@@ -34,7 +34,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.cbSounds = new System.Windows.Forms.ComboBox();
             this.btnOK = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonAlarm = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // maskedTextBox1
@@ -87,21 +87,21 @@
             // 
             // button1
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(81, 276);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(195, 29);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Запустить будильник";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.buttonAlarm.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonAlarm.Location = new System.Drawing.Point(81, 276);
+            this.buttonAlarm.Name = "button1";
+            this.buttonAlarm.Size = new System.Drawing.Size(195, 29);
+            this.buttonAlarm.TabIndex = 4;
+            this.buttonAlarm.Text = "Запустить будильник";
+            this.buttonAlarm.UseVisualStyleBackColor = true;
+            this.buttonAlarm.Click += new System.EventHandler(this.button1_Click);
             // 
             // FormAlarm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(352, 367);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.buttonAlarm);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.cbSounds);
             this.Controls.Add(this.label1);
@@ -120,6 +120,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cbSounds;
         private System.Windows.Forms.Button btnOK;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonAlarm;
     }
 }

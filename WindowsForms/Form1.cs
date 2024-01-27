@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Drawing.Text;
 using System.Reflection;
+using System.Security.Claims;
 
 namespace WindowsForms
 {
@@ -49,8 +50,8 @@ namespace WindowsForms
 			colorDialog1.Color = foreground;
 			colorDialog2.Color = background;
 
-			SetMainDebug();
-			SetChooseDebug();
+			//SetMainDebug();
+			//SetChooseDebug();
 
             foreach (string i in chooseFont.AllFonts)
             {
@@ -80,7 +81,12 @@ namespace WindowsForms
 				string date = DateTime.Now.ToString("yyyy.MM.dd ddd");
 				label1.Text = $"{label1.Text}\n{date}";
 			}
-			if(formAlarm.B == true) if(label1.Text == formAlarm.MaskedTextBox1.Text) formAlarm.Sp.Play();
+		if (formAlarm.B == true)
+				if (DateTime.Now.ToString("hh:mm:ss tt") == formAlarm.Alarm.ToString("hh:mm:ss tt"))
+				{
+					formAlarm.Sp.Play();
+					formAlarm.B = false;
+				}
 		}
 
 		private void btnExit_Click(object sender, EventArgs e)
