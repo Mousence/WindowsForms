@@ -42,13 +42,16 @@
 			this.btnSelectSound = new System.Windows.Forms.Button();
 			this.lblCurrentDirectory = new System.Windows.Forms.Label();
 			this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-			this.listView1 = new System.Windows.Forms.ListView();
 			this.axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
+			this.lstBoxSound = new System.Windows.Forms.ListBox();
+			this.btnAlarm = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// maskedTextBox1
 			// 
+			this.maskedTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.maskedTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.maskedTextBox1.Location = new System.Drawing.Point(404, 110);
 			this.maskedTextBox1.Mask = " 00:00:00";
@@ -65,6 +68,8 @@
 			// 
 			// label1
 			// 
+			this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.label1.AutoSize = true;
 			this.label1.BackColor = System.Drawing.SystemColors.ActiveCaption;
 			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -77,6 +82,8 @@
 			// 
 			// cbSounds
 			// 
+			this.cbSounds.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.cbSounds.FormattingEnabled = true;
 			this.cbSounds.Location = new System.Drawing.Point(449, 12);
 			this.cbSounds.Name = "cbSounds";
@@ -86,6 +93,7 @@
 			// 
 			// btnOK
 			// 
+			this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
 			this.btnOK.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.btnOK.Location = new System.Drawing.Point(404, 326);
@@ -98,6 +106,7 @@
 			// 
 			// button1
 			// 
+			this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
 			this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.button1.Location = new System.Drawing.Point(192, 326);
 			this.button1.Name = "button1";
@@ -126,6 +135,7 @@
 			// 
 			// button2
 			// 
+			this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.button2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
 			this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.button2.Location = new System.Drawing.Point(490, 326);
@@ -154,16 +164,6 @@
 			this.lblCurrentDirectory.TabIndex = 9;
 			this.lblCurrentDirectory.Text = "Current directory";
 			// 
-			// listView1
-			// 
-			this.listView1.HideSelection = false;
-			this.listView1.Location = new System.Drawing.Point(12, 127);
-			this.listView1.Name = "listView1";
-			this.listView1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-			this.listView1.Size = new System.Drawing.Size(362, 160);
-			this.listView1.TabIndex = 10;
-			this.listView1.UseCompatibleStateImageBehavior = false;
-			// 
 			// axWindowsMediaPlayer1
 			// 
 			this.axWindowsMediaPlayer1.Enabled = true;
@@ -173,13 +173,32 @@
 			this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(190, 122);
 			this.axWindowsMediaPlayer1.TabIndex = 11;
 			// 
+			// lstBoxSound
+			// 
+			this.lstBoxSound.FormattingEnabled = true;
+			this.lstBoxSound.Location = new System.Drawing.Point(12, 127);
+			this.lstBoxSound.Name = "lstBoxSound";
+			this.lstBoxSound.Size = new System.Drawing.Size(362, 186);
+			this.lstBoxSound.TabIndex = 12;
+			// 
+			// btnAlarm
+			// 
+			this.btnAlarm.Location = new System.Drawing.Point(134, 98);
+			this.btnAlarm.Name = "btnAlarm";
+			this.btnAlarm.Size = new System.Drawing.Size(116, 23);
+			this.btnAlarm.TabIndex = 13;
+			this.btnAlarm.Text = "Add alarm";
+			this.btnAlarm.UseVisualStyleBackColor = true;
+			this.btnAlarm.Click += new System.EventHandler(this.btnAlarm_Click);
+			// 
 			// FormAlarm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(582, 367);
+			this.Controls.Add(this.btnAlarm);
+			this.Controls.Add(this.lstBoxSound);
 			this.Controls.Add(this.axWindowsMediaPlayer1);
-			this.Controls.Add(this.listView1);
 			this.Controls.Add(this.lblCurrentDirectory);
 			this.Controls.Add(this.btnSelectSound);
 			this.Controls.Add(this.button2);
@@ -192,7 +211,7 @@
 			this.Controls.Add(this.maskedTextBox1);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "FormAlarm";
-			this.Text = "FormAlarm";
+			this.Text = "Alarms";
 			((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
@@ -213,7 +232,8 @@
 		private System.Windows.Forms.Button btnSelectSound;
 		private System.Windows.Forms.Label lblCurrentDirectory;
 		private System.ComponentModel.BackgroundWorker backgroundWorker1;
-		private System.Windows.Forms.ListView listView1;
 		private AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer1;
+		private System.Windows.Forms.ListBox lstBoxSound;
+		private System.Windows.Forms.Button btnAlarm;
 	}
 }

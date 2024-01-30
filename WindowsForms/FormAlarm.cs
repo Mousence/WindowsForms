@@ -87,6 +87,15 @@ namespace WindowsForms
             axWindowsMediaPlayer1.URL = openFileDialog.FileName;
             axWindowsMediaPlayer1.Ctlcontrols.play();
 		}
+
+		private void btnAlarm_Click(object sender, EventArgs e)
+		{
+            AddAlarm addAlarm = new AddAlarm();
+            DialogResult result = addAlarm.ShowDialog(this);
+            if (result == DialogResult.OK) {
+				lstBoxSound.Items.Add(addAlarm.Alarm.ToString());
+            //}
+		}
 	}
 }
 
