@@ -42,7 +42,7 @@
 			this.cbFonts.FormattingEnabled = true;
 			this.cbFonts.Location = new System.Drawing.Point(13, 13);
 			this.cbFonts.Name = "cbFonts";
-			this.cbFonts.Size = new System.Drawing.Size(399, 21);
+			this.cbFonts.Size = new System.Drawing.Size(579, 21);
 			this.cbFonts.TabIndex = 0;
 			this.cbFonts.SelectedIndexChanged += new System.EventHandler(this.cbFonts_SelectedIndexChanged);
 			// 
@@ -60,7 +60,7 @@
 			// 
 			this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.btnOK.Location = new System.Drawing.Point(255, 144);
+			this.btnOK.Location = new System.Drawing.Point(435, 144);
 			this.btnOK.Name = "btnOK";
 			this.btnOK.Size = new System.Drawing.Size(75, 23);
 			this.btnOK.TabIndex = 2;
@@ -72,7 +72,7 @@
 			// 
 			this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.btnCancel.Location = new System.Drawing.Point(336, 144);
+			this.btnCancel.Location = new System.Drawing.Point(516, 144);
 			this.btnCancel.Name = "btnCancel";
 			this.btnCancel.Size = new System.Drawing.Size(75, 23);
 			this.btnCancel.TabIndex = 3;
@@ -93,12 +93,13 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(421, 179);
+			this.ClientSize = new System.Drawing.Size(601, 179);
 			this.Controls.Add(this.lblFullName);
 			this.Controls.Add(this.btnCancel);
 			this.Controls.Add(this.btnOK);
 			this.Controls.Add(this.lblExample);
 			this.Controls.Add(this.cbFonts);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.Name = "ChooseFont";
 			this.Text = "ChoseFont";
 			this.ResumeLayout(false);

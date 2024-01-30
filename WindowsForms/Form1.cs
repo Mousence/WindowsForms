@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Drawing.Text;
 using System.Reflection;
+using WMPLib;
 
 namespace WindowsForms
 {
@@ -33,29 +34,28 @@ namespace WindowsForms
 			int startX = Screen.PrimaryScreen.Bounds.Width - this.Width - 25;
 			int startY = 25;
 			this.SetDesktopLocation(startX, startY);
+
+			Directory.SetCurrentDirectory("..\\..\\Fonts");
+			LoadSettings();
+
 			ControlsVisibility(false);
 			showDate = false;
 			showControls = false;
-			onTopToolStripMenuItem.Checked = true;
-            Directory.SetCurrentDirectory("..\\..\\Fonts");
+			TopMostToolStripMenuItem.Checked = true;
+
+			colorDialog1 = new ColorDialog();
+			colorDialog2 = new ColorDialog();
+			chooseFont = new ChooseFont();
+			formAlarm = new FormAlarm();
+			foreach (string i in chooseFont.AllFonts) {
+				toolStripComboBox1.Items.Add(i.Split('\\').Last());
+			}
 			//label1.ForeColor = Color.Red;
 			//label1.BackColor = Color.Black;
-			size = 48;
-			LoadSettings();
-			chooseFont = new ChooseFont();
-            formAlarm = new FormAlarm();
-            colorDialog1 = new ColorDialog();
-			colorDialog2 = new ColorDialog();
+
 			colorDialog1.Color = foreground;
 			colorDialog2.Color = background;
 
-			SetMainDebug();
-			SetChooseDebug();
-
-            foreach (string i in chooseFont.AllFonts)
-            {
-                toolStripComboBox1.Items.Add(i.Split('\\').Last());
-            }
         }
 		void ControlsVisibility(bool visible)
 		{
@@ -124,24 +124,8 @@ namespace WindowsForms
 				fontFile = chooseFont.AllFonts[chooseFont.Index];
 				fontIndex = chooseFont.Index;
 			}
-			SetMainDebug();
-			SetChooseDebug();
 		}
-		private void SetMainDebug()
-		{
-			//lblDebugMainFont.Text = $"fontFile:	{fontFile};\n";
-			//lblDebugMainFont.Text += $"font:		{font};\n";
-			//lblDebugMainFont.Text += $"fontIndex:	{fontIndex};\n";
-			//lblDebugMainFont.Text += $"label1.Font:{label1.Font.Name};\n";
-		}
-		private void SetChooseDebug()
-		{
-			//lblDebugCooseFont.Text = $"index:		{chooseFont.Index};\n";
-			//lblDebugCooseFont.Text += $"FontFromArr:{chooseFont.AllFonts[chooseFont.Index]};\n";
-			//lblDebugCooseFont.Text += $"ExampleFont:{chooseFont.LblExample.Font.Name};\n";
-			//if (chooseFont.NewFont.Name != null)
-			//	lblDebugCooseFont.Text += $"NewFont:		{chooseFont.NewFont.Name}";
-		}
+		
 		public void SaveSettings()
 		{
 			StreamWriter sw = new StreamWriter("Settings.cfg");
@@ -219,7 +203,21 @@ namespace WindowsForms
         private void onTopToolStripMenuItem_Click(object sender, EventArgs e)
         {
 			this.TopMost = !this.TopMost;
-			onTopToolStripMenuItem.Checked = !onTopToolStripMenuItem.Checked;
+			TopMostToolStripMenuItem.Checked = !TopMostToolStripMenuItem.Checked;
         }
-    }
+
+		private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+		{
+			this.WindowState = FormWindowState.Normal;
+		}
+
+		private void alarmToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			formAlarm = new FormAlarm();
+			this.TopMost = false;
+			DialogResult result = formAlarm.ShowDialog();
+			Directory.SetCurrentDirectory("..\\Fonts");
+			this.TopMost = true;
+		}
+	}
 }
