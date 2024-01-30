@@ -16,6 +16,10 @@ namespace WindowsForms
 	{
 		string[] SoundsList;
 		int index;
+		// <DateTime, SoundPlayer> Mapped List
+		// Load DateTime, SoundPlayer to List, and the add to 
+		// if(DateTime.Now.ToString("hh:mm:ss tt") == List -> alarm.ToString("hh:mm:ss tt")) ALARM. Deleting map by DateTime
+		//
 
 		//Timer timer01 = new Timer();
 		DateTime alarm;
