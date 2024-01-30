@@ -19,9 +19,14 @@ namespace WindowsForms
         string[] SoundsList;
         int index;
 
-        //Timer timer01 = new Timer();
+		// <DateTime, SoundPlayer> Mapped List
+		// Load DateTime, SoundPlayer to List, and the add to ListView1
+		// if(DateTime.Now.ToString("hh:mm:ss tt") == List -> alarm.ToString("hh:mm:ss tt")) ALARM.
+        // Deleting map asigned by DateTime in Mapped list. Refresh ListView1
 
-        SoundPlayer sp = new SoundPlayer("..\\Sounds\\alarm-clock-01.wav");
+		//Timer timer01 = new Timer();
+
+		SoundPlayer sp = new SoundPlayer("..\\Sounds\\alarm-clock-01.wav");
         public SoundPlayer Sp { get { return sp; } }
         public bool B { get { return b; } }
         public System.Windows.Forms.MaskedTextBox MaskedTextBox1 { get {return maskedTextBox1; } }
@@ -77,7 +82,7 @@ namespace WindowsForms
             lblSoundFile.Text = openFileDialog.SafeFileName;
             lblCurrentDirectory.Text = Directory.GetCurrentDirectory();
             Stream file = openFileDialog.OpenFile();
-            WMPLib.WMPCore wmp = new WMPLib.WMPCore();
+            //WMPLib.WMPCore wmp = new WMPLib.WMPCore();
 
             axWindowsMediaPlayer1.URL = openFileDialog.FileName;
             axWindowsMediaPlayer1.Ctlcontrols.play();
@@ -85,7 +90,3 @@ namespace WindowsForms
 	}
 }
 
-// List
-// Там нужно сделать так
-// 12:05:10 - fdfdfdfd
-// 13:07:10 - htiuerv

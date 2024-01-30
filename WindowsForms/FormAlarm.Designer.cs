@@ -43,6 +43,8 @@
 			this.lblCurrentDirectory = new System.Windows.Forms.Label();
 			this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
 			this.listView1 = new System.Windows.Forms.ListView();
+			this.axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
+			((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// maskedTextBox1
@@ -157,15 +159,26 @@
 			this.listView1.HideSelection = false;
 			this.listView1.Location = new System.Drawing.Point(12, 127);
 			this.listView1.Name = "listView1";
+			this.listView1.RightToLeft = System.Windows.Forms.RightToLeft.No;
 			this.listView1.Size = new System.Drawing.Size(362, 160);
 			this.listView1.TabIndex = 10;
 			this.listView1.UseCompatibleStateImageBehavior = false;
+			// 
+			// axWindowsMediaPlayer1
+			// 
+			this.axWindowsMediaPlayer1.Enabled = true;
+			this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(380, 165);
+			this.axWindowsMediaPlayer1.Name = "axWindowsMediaPlayer1";
+			this.axWindowsMediaPlayer1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer1.OcxState")));
+			this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(190, 122);
+			this.axWindowsMediaPlayer1.TabIndex = 11;
 			// 
 			// FormAlarm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(582, 367);
+			this.Controls.Add(this.axWindowsMediaPlayer1);
 			this.Controls.Add(this.listView1);
 			this.Controls.Add(this.lblCurrentDirectory);
 			this.Controls.Add(this.btnSelectSound);
@@ -180,6 +193,7 @@
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "FormAlarm";
 			this.Text = "FormAlarm";
+			((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -200,5 +214,6 @@
 		private System.Windows.Forms.Label lblCurrentDirectory;
 		private System.ComponentModel.BackgroundWorker backgroundWorker1;
 		private System.Windows.Forms.ListView listView1;
+		private AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer1;
 	}
 }
