@@ -11,6 +11,7 @@ using System.Media;
 using System.IO;
 using System.Net;
 using WMPLib;
+using System.Security.Claims;
 
 namespace WindowsForms
 {
@@ -19,6 +20,9 @@ namespace WindowsForms
         string[] SoundsList;
         int index;
 
+		DateTime alarm;
+		SortedDictionary<DateTime, SoundPlayer> SoundList = new SortedDictionary<DateTime, SoundPlayer>();
+        List<SortedDictionary<DateTime, SoundPlayer>> AlarmList = new List<SortedDictionary<DateTime, SoundPlayer>>();
 		// <DateTime, SoundPlayer> Mapped List
 		// Load DateTime, SoundPlayer to List, and the add to ListView1
 		// if(DateTime.Now.ToString("hh:mm:ss tt") == List -> alarm.ToString("hh:mm:ss tt")) ALARM.
@@ -42,14 +46,29 @@ namespace WindowsForms
             }
             maskedTextBox1.Text = DateTime.Now.ToString("hh:mm:ss tt");
             cbSounds.SelectedIndex = 0;
+            axWindowsMediaPlayer1.URL = sp.SoundLocation.Split('\\').Last();
         }
-
-        private void timer1_Tick(object sender, EventArgs e)
+		private string GetAlarmText(DateTime alarmTime, SoundPlayer soundPlayer)
+		{
+			return $"{alarmTime.ToString()} - {soundPlayer.SoundLocation.Split('\\').Last()}";
+		}
+		private void timer1_Tick(object sender, EventArgs e)
         {
             label1.Text = DateTime.Now.ToString("hh:mm:ss tt");
-            if (b) button1.Text = "Остановить будильник";
-            if (label1.Text == MaskedTextBox1.Text) sp.Play();
-        }
+			foreach (var AlarmEntry in AlarmList.ToList())
+			{
+				foreach (var alarmTime in AlarmEntry.Keys.ToList())
+				{
+					if (DateTime.Now.ToString("hh:mm:ss tt") == alarmTime.ToString("hh:mm:ss tt"))
+					{
+						SoundPlayer soundPlayer = AlarmEntry[alarmTime];
+						soundPlayer.Play();
+                        AlarmList.Remove(AlarmEntry);
+                        lstBoxSound.Items.RemoveAt(0);
+					}
+				}
+			}
+		}
 
         private void btnOK_Click(object sender, EventArgs e)
         {
@@ -58,14 +77,18 @@ namespace WindowsForms
 
         private void button1_Click(object sender, EventArgs e)
         {
+			alarm = DateTime.Parse(maskedTextBox1.Text);
 
-            maskedTextBox1.Enabled = !maskedTextBox1.Enabled; b = !b;
-            if (!b)
-            {
+			maskedTextBox1.Enabled = !maskedTextBox1.Enabled; b = !b;
+            if (!b) button1.Text = "Остановить будильник";
+            else {
+                if (!SoundList.ContainsKey(alarm)) {
+					SoundList.Add(alarm, sp);
+                    AlarmList.Add(SoundList);
+                    lstBoxSound.Items.Add(GetAlarmText(alarm, sp));
+                }
                 button1.Text = "Запустить будильник";
-                //timer01.Stop();
             }
-            //else timer01.Start();
         }
 
         private void cbSounds_SelectedIndexChanged(object sender, EventArgs e)
@@ -94,7 +117,7 @@ namespace WindowsForms
             DialogResult result = addAlarm.ShowDialog(this);
             if (result == DialogResult.OK) {
 				lstBoxSound.Items.Add(addAlarm.Alarm.ToString());
-            //}
+            }
 		}
 	}
 }

@@ -176,6 +176,7 @@
 			// lstBoxSound
 			// 
 			this.lstBoxSound.FormattingEnabled = true;
+			this.lstBoxSound.HorizontalScrollbar = true;
 			this.lstBoxSound.Location = new System.Drawing.Point(12, 127);
 			this.lstBoxSound.Name = "lstBoxSound";
 			this.lstBoxSound.Size = new System.Drawing.Size(362, 186);
